@@ -82,10 +82,10 @@ document.querySelectorAll(".btn-delete-officer").forEach((btnDelete) => {
     );
 });
 
-document.querySelectorAll(".btn-delete-admin").forEach((btnDelete) => {
+document.querySelectorAll(".btn-delete-role").forEach((btnDelete) => {
     deleteModal(
         btnDelete,
-        "/hapus-admin",
+        "/hapus-role",
         "data yang telah dihapus tidak bisa dikembalikan"
     );
 });
@@ -94,7 +94,7 @@ document.querySelectorAll(".btn-delete-product-income").forEach((btnDelete) => {
     deleteModal(
         btnDelete,
         "/hapus-barang-masuk",
-        "Menghapus data barang masuk juga akan menghapus jumlah data barang yang sebelumnya ditambahkan"
+        "Menghapus data barang masuk juga akan mempengaruhi harga data barang terkait"
     );
 });
 
@@ -102,7 +102,7 @@ document.querySelectorAll(".btn-delete-product-outcome").forEach((btnDelete) => 
     deleteModal(
         btnDelete,
         "/hapus-barang-keluar",
-        "Menghapus data barang keluar juga akan mempengaruhi jumlah data barang terkait"
+        "Menghapus data barang keluar juga akan mempengaruhi harga data barang terkait"
     );
 });
 
@@ -110,14 +110,6 @@ document.querySelectorAll(".btn-delete-stockop").forEach((btnDelete) => {
     deleteModal(
         btnDelete,
         "/hapus-stockop",
-        "Menghapus data stockopname juga akan mempengaruhi data detail stockopname terkait"
-    );
-});
-
-document.querySelectorAll(".btn-delete-detstocksop").forEach((btnDelete) => {
-    deleteModal(
-        btnDelete,
-        "/hapus-detstockop",
         "data yang telah dihapus tidak bisa dikembalikan"
     );
 });

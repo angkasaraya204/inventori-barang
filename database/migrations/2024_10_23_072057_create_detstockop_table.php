@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('detstockop', function (Blueprint $table) {
             $table->id('id');
-            $table->foreignId('id_stockop')->constrained('stockop')->onUpdate('cascade')->onDelete('cascade');
+            $table->date('tanggal');
             $table->foreignId('id_products')->constrained('products')->onUpdate('cascade')->onDelete('cascade'); // Pastikan tabel barang sudah ada
             $table->integer('stok_real');
-            $table->integer('selisih');
+            $table->text('keterangan')->nullable();
+            $table->string('kondisi')->nullable();
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

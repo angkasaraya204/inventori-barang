@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
-    <title>Login</title>
+    <title>Halaman Masuk</title>
 </head>
 <body>
     <div class=" bg-slate-700 h-[100vh]">
@@ -13,16 +13,13 @@
         <div class="bg-white p-6 rounded-lg mx-auto w-96 md:w-1/4 absolute top-20">
           <div class="text-center">
             <img
-              src="https://placehold.co/32x32"
+              src="https://i.ibb.co.com/6bzVPKG/2-KA03-SI-Black.png"
               alt="logo"
               class="w-10 h-10 rounded mx-auto block object-cover"
             />
-            <p class="text-sm text-slate-400 mt-2 font-semibold">
-              Dashboard
-            </p>
-            <p class="font-bold text-xl mt-5">Log in to Inventori</p>
+            <p class="font-bold text-xl mt-5">Masuk ke Inventori</p>
             <p class="text-slate-400 text-xs mt-2">
-              Enter your email and password below
+              Masukan email dan kata sandi kamu dibawah
             </p>
           </div>
           <div class="mt-10">
@@ -47,7 +44,7 @@
                   type="email"
                   name="email"
                   value="{{old('email')}}"
-                  placeholder="Email address"
+                  placeholder="alamat email"
                 />
                
               </div>
@@ -57,7 +54,7 @@
                   class="text-sm text-slate-400 font-semibold uppercase"
                   for="password"
                 >
-                  Password
+                  Kata Sandi
                 </label>
               </div>
               <div
@@ -68,14 +65,14 @@
                   class="w-full h-full text-sm focus:outline-none"
                   type="password"
                   name="password"
-                  placeholder="Password"
+                  placeholder="kata sandi"
                 />
               </div>
                @error('password') <p class="italic text-red-500 text-xs">{{$message}}</p> @enderror
               <button
                 class="bg-blue-700 text-white text-center w-full mt-5 rounded-lg py-2 text-sm"
               >
-                Log in
+                Masuk
               </button>
             </form>
           </div>

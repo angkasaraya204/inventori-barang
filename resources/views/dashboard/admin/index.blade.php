@@ -1,67 +1,86 @@
-@extends('layouts.main')
-
+@extends('layouts.master')
+@section('title', 'Data Pengguna')
 @section('container')
-
 @if (session('message'))
-   <div id="toast-container" class="hidden fixed z-50 items-center w-full max-w-xs p-4 space-x-4 text-gray-500 bg-white divide-x divide-gray-200 rounded border-l-2 border-green-400 shadow top-5 right-5 dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800" role="alert">
+    <div id="toast-container" class="hidden fixed z-50 items-center w-full max-w-xs p-4 space-x-4 text-gray-500 bg-white divide-x divide-gray-200 rounded border-l-2 border-green-400 shadow top-5 right-5 dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800" role="alert">
     <div class=" text-green-400 text-sm font-bold capitalize">{{session()->get('message')}}</div>
 </div>
 @endif
-    <div class="container px-4">
-        <div class="bg-white mt-5 p-5 rounded-lg">
-            <div class="flex justify-between">
-                <div class="text-left">
-                    <h2 class="text-gray-600 font-bold">Data Admin</h2>
-                    <a href="/input-admin" class="text-sm bg-gray-700 text-white block mt-2 px-2 py-1 rounded">Tambah Admin</a>
-                </div>
-                <form method="get" action="/admin" class="form">
-                    <div class="flex">
-                        <div class="border p-1 px-2 rounded-l">
-                          <input id="search" name="search" class="focus:outline-none text-sm" type="text" placeholder="search">
-                        </div>
-                        <button type="submit" class="text-sm bg-gray-700 p-2 rounded-r text-white h-full">cari</button>
-                    </div>
-                </form>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Data Pengguna</h3>
             </div>
-
-            <table class="w-full mt-5 text-sm text-gray-600">
-                <thead>
-                    <tr class="font-bold border-b-2 p-2">
-                        <td class="p-2">No</td>
-                        <td class="p-2">Nama Admin</td>
-                        <td class="p-2">Email</td>
-                        <td class="p-2">Role</td>
-                        <td class="p-2">Aksi</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                        $noAdmin = 1;
-                    @endphp
-                    @foreach ($admins as $admin)
-                        <tr class="border-b p-2">
-                        <td class="p-2">{{$noAdmin}}</td>
-                        <td class="p-2">{{$admin->name}}</td>
-                        <td class="p-2">{{$admin->email}}</td>
-                        <td class="p-2">{{$admin->role}}</td>
-                        <td class="p-2 flex gap-2">
-                            <button data-id="{{$admin->id}}" class="btn-delete-admin bg-red-500 py-1 px-4 rounded text-white">
-                                <i class="ri-delete-bin-line"></i>
-                            </button>
-                            <a href="/ubah-admin/{{$admin->id}}" class="bg-yellow-400 py-1 px-4 rounded text-white">
-                                <i class="ri-edit-box-line"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    @php
-                        $noAdmin++;
-                    @endphp
-                    @endforeach
-                </tbody>
-            </table>
-            <div class="mt-5">
-                {{$admins->links('pagination::tailwind')}}
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Data Pengguna</li>
+                    </ol>
+                </nav>
             </div>
         </div>
     </div>
+    <section class="section">
+        <div class="card">
+            <div class="card-header">
+                <div class="buttons">
+                    <a href="{{ '/input-role' }}" class="btn btn-dark">Tambah Data</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <!-- Table with outer spacing -->
+                <div class="table-responsive">
+                    <table class="table table-bordered table-lg">
+                        <thead>
+                            <tr>
+                                <td>No</td>
+                                <td>Nama Admin</td>
+                                <td>Email</td>
+                                <td>Peran</td>
+                                <td>Aksi</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                                $noAdmin = 1;
+                            @endphp
+                            @foreach ($admins as $admin)
+                            <tr>
+                                <td>{{$noAdmin}}</td>
+                                <td>{{$admin->name}}</td>
+                                <td>{{$admin->email}}</td>
+                                <td>{{$admin->role}}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-dark dropdown-toggle me-1" id="aksiprod" type="button"
+                                            id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="btn-delete-role dropdown-item" data-id="{{$admin->id}}">
+                                                <span class="fa-fw select-all fas"></span> Hapus
+                                            </a>
+                                            <a class="dropdown-item" href="/ubah-role/{{$admin->id}}">
+                                                <span class="fa-fw select-all fas"></span> Edit
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            @php
+                                $noAdmin++;
+                            @endphp
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <div class="mt-5">
+                        {{$admins->links('pagination::tailwind')}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 @endsection

@@ -1,56 +1,91 @@
-@extends('layouts.main')
-
+@extends('layouts.master')
+@section('title', 'Ubah Data Pemasok')
 @section('container')
-<div class="container px-4">
-    <div class="bg-white p-5 mt-5 rounded-lg">
-        <div class="flex">
-            <h2 class="text-gray-600 font-bold">Ubah Data Supplier</h2>
-        </div>
-
-        <form action="/ubah-supplier/{{$supplier->id}}" method="POST" class="w-1/2 mt-5">
-            @csrf
-            <div class="mt-3">
-                <label class="text-sm text-gray-600" for="name">Nama Supplier</label>
-                <div class="border-2 p-1 @error('name')  border-red-400  @enderror">
-                    <input name="name" value="{{$supplier->name}}" class="w-full h-full focus:outline-none text-sm" id="name" type="text">
-                </div>
-                @error('name')
-                    <p class="italic text-red-500 text-sm mt-1">{{$message}}</p>
-                @enderror
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Ubah Data Pemasok</h3>
             </div>
-            <div class="mt-3">
-                <label class="text-sm text-gray-600" for="address">Alamat Supplier</label>
-                <div class="@error('address')  border-red-400  @enderror border-2 p-1">
-                    <input value="{{$supplier->address}}"  name="address" class="text-sm w-full h-full focus:outline-none" id="address" type="text">
-                </div>
-                @error('address')
-                    <p class="italic text-red-500 text-sm mt-1">{{$message}}</p>
-                @enderror
-            </div>
-            <div class="mt-3">
-                <label class="text-sm text-gray-600" for="email">Email Supplier</label>
-                <div class="@error('email')  border-red-400  @enderror border-2 p-1">
-                    <input type="email" value="{{$supplier->email}}"  name="email" class="text-sm w-full h-full focus:outline-none" id="email" type="text">
-                </div>
-                 @error('email')
-                    <p class="italic text-red-500 text-sm mt-1">{{$message}}</p>
-                @enderror
-            </div>
-             <div class="mt-3">
-                <label class="text-sm text-gray-600" for="phone">No Telephone Supplier</label>
-                <div class="@error('phone')  border-red-400  @enderror border-2 p-1">
-                    <input value="{{$supplier->phone}}"  name="phone" class="text-sm w-full h-full focus:outline-none" id="phone" type="text">
-                </div>
-                 @error('phone')
-                    <p class="italic text-red-500 text-sm mt-1">{{$message}}</p>
-                @enderror
-            </div>
-            <div class="mt-3">
-                <button class="bg-gray-600 text-white w-full p-2 rounded text-sm">Simpan Data</button>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Data Pemasok</li>
+                        <li class="breadcrumb-item active" aria-current="page">Ubah Data</li>
+                    </ol>
+                </nav>
             </div>
         </div>
-    </form>
     </div>
+    <section class="section">
+        <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+                <form action="/ubah-supplier/{{$supplier->id}}" method="POST" enctype="multipart/form-data" class="form form-vertical">
+                    @csrf
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="name">Nama Pemasok</label>
+                                    <div class="@error('name')  border-red-400  @enderror">
+                                        <input type="text" id="name" class="form-control"
+                                        placeholder="Masukkan Nama Pemasok" name="name" value="{{$supplier->name}}">
+                                    </div>
+                                </div>
+                                @error('name')
+                                    <p class="italic text-red-500 text-sm mt-1">{{$message}}</p>
+                                @enderror
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="address">Alamat Pemasok</label>
+                                    <div class="@error('address')  border-red-400  @enderror">
+                                        <input type="text" id="address" class="form-control"
+                                        placeholder="Masukkan Alamat" name="address" value="{{$supplier->address}}">
+                                    </div>
+                                </div>
+                                @error('address')
+                                    <p class="italic text-red-500 text-sm mt-1">{{$message}}</p>
+                                @enderror
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="email">Email Pemasok</label>
+                                    <div class="@error('email')  border-red-400  @enderror">
+                                        <input type="email" placeholder="Masukkan Email" id="email" class="form-control" name="email" value="{{$supplier->email}}">
+                                    </div>
+                                </div>
+                                @error('email')
+                                    <p class="italic text-red-500 text-sm mt-1">{{$message}}</p>
+                                @enderror
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="phone">Telepon Pemasok</label>
+                                    <div class="@error('phone') border-red-400  @enderror">
+                                        <div class="@error('phone') border-red-400  @enderror">
+                                            <input type="text" id="phone" placeholder="Masukkan Nomer" class="form-control" name="phone" value="{{$supplier->phone}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                @error('phone')
+                                    <p class="italic text-red-500 text-sm mt-1">{{$message}}</p>
+                                @enderror
+                            </div>
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="submit"
+                                    class="btn btn-dark me-1 mb-1" id="aksiprod">Simpan Data</button>
+                                <button type="reset"
+                                    class="btn btn-light-secondary me-1 mb-1">Riset</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
 </div>
 @endsection
-

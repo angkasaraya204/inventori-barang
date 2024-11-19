@@ -1,62 +1,92 @@
-@extends('layouts.main')
-
+@extends('layouts.master')
+@section('title', 'Ubah Data Barang Keluar')
 @section('container')
-<div class="container px-4">
-    <div class="bg-white p-5 mt-5 rounded-lg">
-        <div class="flex">
-            <h2 class="text-gray-600 font-bold">Ubah Data Barang Keluar</h2>
-        </div>
-
-        <form action="/ubah-barang-keluar/{{$productOutcome->id}}" method="POST" class="w-1/2 mt-5">
-            @csrf
-            <div class="flex gap-1 mt-3">
-                <div class="w-full">
-                    <label class="text-sm text-gray-600"  for="name">Nama Barang</label>
-                    <div class="border">
-                        {{-- select with choice js --}}
-                        <select name="product_id" data-id-product="{{$productOutcome->product_id}}"  class="select-product text-black" id="">
-                        </select>
-                    </div>
-                </div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Ubah Data Barang Keluar</h3>
             </div>
-            <div class="flex gap-1 mt-3">
-                <div class="w-full">
-                    <label class="text-sm text-gray-600"  for="category">Nama Supplier</label>
-                    <div class="border">
-                        {{-- select with choice js --}}
-                        <select data-id-supplier="{{$productOutcome->supplier_id}}" name="supplier_id" class="select-supplier text-black" id="">
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-3">
-                <label class="text-sm text-gray-600" for="quantity">Jumlah Barang Keluar</label>
-                <div class="@error('quantity')  border-red-400  @enderror border-2 p-1">
-                    <input value="{{$productOutcome->quantity}}" name="quantity" autocomplete="off" class="text-sm text-black w-full h-full focus:outline-none" id="quantity" type="number">
-                </div>
-                @error('quantity')
-                    <p class="italic text-red-500 text-sm mt-1">{{$message}}</p>
-                @enderror
-            </div>
-            <div class="mt-3">
-                <label class="text-sm text-gray-600" for="date">Tanggal</label>
-                <div class="@error('date')  border-red-400  @enderror border-2 p-1">
-                    <input value="{{$productOutcome->date}}" type="date" name="date" class="text-sm text-black w-full h-full focus:outline-none" id="date" type="text">
-                </div>
-                 @error('date')
-                    <p class="italic text-red-500 text-sm mt-1">{{$message}}</p>
-                @enderror
-            </div>
-            <div class="mt-3">
-                <button class="bg-gray-600 text-white w-full p-2 rounded text-sm">Simpan Data</button>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Data Barang Keluar</li>
+                        <li class="breadcrumb-item active" aria-current="page">Ubah Data</li>
+                    </ol>
+                </nav>
             </div>
         </div>
-    </form>
     </div>
+    <section class="section">
+        <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+                <form action="/ubah-barang-Keluar/{{$productOutcome->id}}" method="POST" enctype="multipart/form-data" class="form form-vertical">
+                    @csrf
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="product_id">Nama Barang</label>
+                                    <div class="@error('product_id') border-red-400 @enderror">
+                                        <select name="product_id" data-id-product="{{$productOutcome->product_id}}" class="select-product form-select" id="product_id">
+                                        </select>
+                                    </div>
+                                </div>
+                                @error('product_id')
+                                    <p class="italic text-red-500 text-sm mt-1">{{$message}}</p>
+                                @enderror
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="supplier_id">Nama Pemasok</label>
+                                    <div class="@error('supplier_id') border-red-400 @enderror">
+                                        <select name="supplier_id" data-id-supplier="{{$productOutcome->supplier_id}}" class="select-supplier form-select" id="supplier_id">
+                                        </select>
+                                    </div>
+                                </div>
+                                @error('supplier_id')
+                                    <p class="italic text-red-500 text-sm mt-1">{{$message}}</p>
+                                @enderror
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="quantity">Jumlah Barang Masuk</label>
+                                    <div class="@error('quantity') border-red-400 @enderror">
+                                        <input type="number" id="quantity" class="form-control" name="quantity" value="{{$productOutcome->quantity}}">
+                                    </div>
+                                </div>
+                                @error('quantity')
+                                    <p class="italic text-red-500 text-sm mt-1">{{$message}}</p>
+                                @enderror
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="date">Tanggal</label>
+                                    <div class="@error('date') border-red-400 @enderror">
+                                        <input type="date" id="date" class="form-control" name="date" value="{{$productOutcome->date}}">
+                                    </div>
+                                </div>
+                                @error('date')
+                                    <p class="italic text-red-500 text-sm mt-1">{{$message}}</p>
+                                @enderror
+                            </div>
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="submit"
+                                    class="btn btn-dark me-1 mb-1" id="aksiprod">Simpan Data</button>
+                                <button type="reset"
+                                    class="btn btn-light-secondary me-1 mb-1">Riset</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
 </div>
 @endsection
-
 @section('js')
     <script src="{{ asset('js/supplies/update.js') }}"></script>
 @endsection
-

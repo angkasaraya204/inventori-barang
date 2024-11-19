@@ -1,0 +1,12 @@
+#aksiprod {
+    background-color: #343a40; /* Warna latar belakang default */
+    color: white; /* Warna teks */
+    border-color: #343a40; /* Warna border default */
+}
+
+#aksiprod:hover, #aksiprod:focus, #aksiprod:active {
+    background-color: #343a40 !important; /* Warna latar belakang tetap sama saat di-hover */
+    color: white !important; /* Warna teks tetap sama saat di-hover */
+    border-color: #343a40 !important; /* Warna border tetap sama */
+    box-shadow: none !important; /* Hilangkan bayangan jika ada */
+}

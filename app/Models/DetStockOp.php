@@ -12,16 +12,13 @@ class DetStockOp extends Model
     protected $table = 'detstockop';
 
     protected $fillable = [
-        'id_stockop',
+        'tanggal',
         'id_products',
         'stok_real',
-        'selisih',
+        'keterangan',
+        'kondisi',
+        'status',
     ];
-
-    public function stockOp()
-    {
-        return $this->belongsTo(StockOp::class, 'id_stockop');
-    }
 
     public function product()
     {

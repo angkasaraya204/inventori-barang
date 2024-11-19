@@ -8,7 +8,6 @@ use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\ProductSuppliesController;
 use App\Http\Controllers\Dashboard\SupplierController;
 use App\Http\Controllers\Dashboard\UserController;
-use App\Http\Controllers\Dashboard\StockOpController;
 use App\Http\Controllers\Dashboard\DetStockOpController;
 
 /*
@@ -49,22 +48,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/hapus-kategori/{id}', [CategoryController::class, 'delete']);
     Route::get('/ubah-kategori/{id}', [CategoryController::class, 'edit']);
     Route::post('/ubah-kategori/{id}', [CategoryController::class, 'update']);
-    Route::get('/excel/kategori',[CategoryController::class,'exportExcel']);
+    // Route::get('/excel/kategori',[CategoryController::class,'exportExcel']);
 
 
-    Route::get('/admin', [UserController::class, 'admin'])->middleware('role:admin');
-    Route::get('/petugas', [UserController::class, 'officer'])->middleware('role:admin');
-    Route::delete('/hapus-petugas/{id}', [UserController::class, 'delete'])->middleware('role:admin');
-    Route::get('/input-petugas', [UserController::class, 'createOfficer'])->middleware('role:admin');
-    Route::post('/input-petugas', [UserController::class, 'storeOfficer'])->middleware('role:admin');
-    Route::get('/ubah-petugas/{id}', [UserController::class, 'editOfficer'])->middleware('role:admin');
-    Route::post('/ubah-petugas/{id}', [UserController::class, 'updateOfficer'])->middleware('role:admin');
-
-    Route::get('/input-admin', [UserController::class, 'createAdmin']);
-    Route::post('/input-admin', [UserController::class, 'storeAdmin']);
-    Route::delete('/hapus-admin/{id}', [UserController::class, 'delete']);
-    Route::get('/ubah-admin/{id}', [UserController::class, 'editAdmin']);
-    Route::post('/ubah-admin/{id}', [UserController::class, 'updateAdmin']);
+    Route::get('/role', [UserController::class, 'admin'])->middleware('role:admin');
+    Route::get('/input-role', [UserController::class, 'createAdmin'])->middleware('role:admin');
+    Route::post('/input-role', [UserController::class, 'storeAdmin'])->middleware('role:admin');
+    Route::delete('/hapus-role/{id}', [UserController::class, 'deleteAdmin'])->middleware('role:admin');
+    Route::get('/ubah-role/{id}', [UserController::class, 'editAdmin'])->middleware('role:admin');
+    Route::post('/ubah-role/{id}', [UserController::class, 'updateAdmin'])->middleware('role:admin');
 
     Route::get('/barang-masuk', [ProductSuppliesController::class, 'indexIncome']);
     Route::get('/input-barang-masuk', [ProductSuppliesController::class, 'createIncome']);
@@ -80,20 +72,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/ubah-barang-keluar/{id}', [ProductSuppliesController::class, 'editOutcome']);
     Route::post('/ubah-barang-keluar/{id}', [ProductSuppliesController::class, 'updateOutcome']);
 
-    Route::get('/stockop', [StockOpController::class, 'indexStockop']);
-    Route::get('/all-stockop', [StockOpController::class, 'getAllStockOp']);
-    Route::get('/input-stockop', [StockOpController::class, 'createStockop']);
-    Route::post('/input-stockop', [StockOpController::class, 'storeStockop']);
-    Route::get('/ubah-stockop/{id}', [StockOpController::class, 'editStockop']);
-    Route::post('/ubah-stockop/{id}', [StockOpController::class, 'updateStockop']);
-    Route::delete('/hapus-stockop/{id}', [StockOpController::class, 'destroyStockop']);
-
-    Route::get('/detstockop', [DetStockOpController::class, 'indexDetStockop']);
-    Route::get('/input-detstockop', [DetStockOpController::class, 'createDetStockop']);
-    Route::post('/input-detstockop', [DetStockOpController::class, 'storeDetStockop']);
-    Route::get('/ubah-detstockop/{id}', [DetStockOpController::class, 'editDetStockop']);
-    Route::post('/ubah-detstockop/{id}', [DetStockOpController::class, 'updateDetStockop']);
-    Route::delete('/hapus-detstockop/{id}', [DetStockOpController::class, 'destroyDetStockop']);
+    Route::get('/stockop', [DetStockOpController::class, 'indexDetStockop']);
+    Route::get('/input-stockop', [DetStockOpController::class, 'createDetStockop']);
+    Route::post('/input-stockop', [DetStockOpController::class, 'storeDetStockop']);
+    Route::get('/ubah-stockop/{id}', [DetStockOpController::class, 'editDetStockop']);
+    Route::post('/ubah-stockop/{id}', [DetStockOpController::class, 'updateDetStockop']);
+    Route::delete('/hapus-stockop/{id}', [DetStockOpController::class, 'destroyDetStockop']);
+    Route::get('/excel/stockop',[DetStockOpController::class,'exportExcel']);
+    Route::post('/stockop/approve/{id}', [DetStockOpController::class, 'approve'])->middleware('role:kepalagudang');
+    Route::post('/stockop/pending/{id}', [DetStockOpController::class, 'setPending'])->middleware('role:kepalagudang');
+    Route::post('/stockop/reject/{id}', [DetStockOpController::class, 'reject'])->middleware('role:kepalagudang');
 
     Route::get('/logout',[AuthController::class, 'logout']);
 });

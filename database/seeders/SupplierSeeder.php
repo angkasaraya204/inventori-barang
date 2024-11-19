@@ -14,24 +14,17 @@ class SupplierSeeder extends Seeder
     public function run(): void
     {
         DB::table('suppliers')->insert([
-            'name' => "PT Hendy Kaya Raya",
-            'address' => "Ngawi",
+            'name' => "PT PBW",
+            'address' => "Jakarta",
             'phone'=>'08123456789',
-            'email'=>'heendykayaraya@gmailcom'
+            'email'=>'pbw@gmailcom'
         ]);
 
         DB::table('suppliers')->insert([
-            'name' => "PT Hendy Sukses Selalu",
-            'address' => "Jember",
-            'phone'=>'08123456789',
-            'email'=>'hendysukses@gmailcom'
-        ]);
-
-        DB::table('suppliers')->insert([
-            'name' => "PT Hendy Sultan Semesta",
+            'name' => "PT PBW2",
             'address' => "Surabaya",
             'phone'=>'08123456789',
-            'email'=>'hendysultan@gmailcom'
+            'email'=>'pbw2@gmailcom'
         ]);
     }
 }

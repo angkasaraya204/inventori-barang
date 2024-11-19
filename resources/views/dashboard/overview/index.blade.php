@@ -1,25 +1,90 @@
-@extends('layouts.main')
-
+@extends('layouts.master')
+@section('title', 'Halaman Utama')
 @section('container')
-   <div class="container px-4">
-    <div class="p-5 mt-5 rounded-lg">
-        <div class="text-left">
-            <h1 class="text-gray-600 font-semibold">Overview</h1>
+<div class="page-heading">
+    <h3>Halaman Utama</h3>
+</div>
+<div class="page-content">
+    <section class="row">
+        <div class="col-12 col-lg-12">
+            <div class="row">
+                <!-- Card 1 -->
+                <div class="col-12 col-lg-3 col-md-6 mb-4">
+                    <div class="card w-100">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="stats-icon purple">
+                                        <i class="iconly-boldShow"></i>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <h6 class="text-muted font-semibold">Jumlah Data <br>Barang</h6>
+                                    <h6 class="font-extrabold mb-0">{{$countProducts}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="col-12 col-lg-3 col-md-6 mb-4">
+                    <div class="card w-100">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="stats-icon blue">
+                                        <i class="iconly-boldShow"></i>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <h6 class="text-muted font-semibold">Jumlah Data Barang Masuk</h6>
+                                    <h6 class="font-extrabold mb-0">{{$countProductIncome}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Card 3 -->
+                <div class="col-12 col-lg-3 col-md-6 mb-4">
+                    <div class="card w-100">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="stats-icon green">
+                                        <i class="iconly-boldShow"></i>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <h6 class="text-muted font-semibold">Jumlah Data Barang Keluar</h6>
+                                    <h6 class="font-extrabold mb-0">{{$countProductOutcome}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Card 4 -->
+                <div class="col-12 col-lg-3 col-md-6 mb-4">
+                    <div class="card w-100">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="stats-icon red">
+                                        <i class="iconly-boldShow"></i>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <h6 class="text-muted font-semibold">Jumlah Data Pemasok</h6>
+                                    <h6 class="font-extrabold mb-0">{{$countPemasok}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="flex gap-4 mt-5">
-        <div class="bg-white rounded w-1/3 text-center hover:border-blue-500 p-10">
-            <h2 class="font-bold text-4xl">{{$countProducts}}</h2>
-            <p class="text-sm mt-2 text-gray-600">Jumlah Data Barang</p>
-        </div>
-        <div class="bg-white rounded text-center hover:border-blue-500 w-1/3 p-10">
-              <h2 class="font-bold text-4xl">{{$countProductOutcome}}</h2>
-            <p class="text-sm text-gray-600 mt-2">Jumlah Data Barang Keluar</p>
-        </div>
-        <div class="bg-white rounded w-1/3 text-center hover:border-blue-500 p-10">
-              <h2 class="font-bold text-4xl">{{$countProductIncome}}</h2>
-            <p class="text-sm mt-2 text-gray-600">Jumlah Data Barang Masuk</p>
-        </div>
-        </div>
-    </div>
-   </div>
+    </section>
+</div>
 @endsection

@@ -9,21 +9,21 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function admin () {
-        $admins = User::where('role', 'admin')->paginate(10);
+    public function admin (Request $request) {
+        // $admins = User::paginate(10);
+        if($request->has('search')){
+            $admins = User::where('name', 'LIKE', "%{$request->search}%")->paginate(10);
+        } else {
+            $admins = User::paginate(10);
+        }
         return view('dashboard.admin.index', ['admins'=>$admins]);
     }
 
-    public function officer (Request $request) {
-        if($request->has('search')){
-        $officers = User::where('name', 'LIKE', "%{$request->search}%")->where('role', 'officer')->paginate(10);
-        } else {
-        $officers = User::where('role', 'officer')->paginate(10);
-        }
-        return view('dashboard.officer.index', ['officers'=>$officers]);
+    public function createAdmin () {
+       return view('dashboard.admin.input');
     }
 
-    public function delete($id) {
+    public function deleteAdmin($id) {
         $user = User::findOrFail($id);
         $deletedUser = $user->delete();
 
@@ -33,82 +33,23 @@ class UserController extends Controller
         }
     }
 
-    public function createOfficer () {
-       return view('dashboard.officer.input');
-    }
-
-    public function storeOfficer (Request $request) {
-        $this->validate($request, [
-                'name'=>['required'],
-                'email'=>['required'],
-                'password'=>['required']
-        ]);
-
-        $userCreated = User::create([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'password'=>Hash::make($request->password),
-            'role'=>'officer'
-        ]);
-
-        if($userCreated){
-            return redirect('/petugas')->with('message','data berhasil ditambahkan');
-        }
-    }
-
-    public function editOfficer ($id) {
-        $officer = User::findOrFail($id);
-        return view('dashboard.officer.update', ['officer'=>$officer]);
-    }
-
-    public function updateOfficer (Request $request, $id) {
-        $this->validate($request, [
-                'name'=>['required'],
-                'email'=>['required'],
-                'password'=>['required']
-        ]);
-
-        $officer = User::findOrFail($id);
-
-        if($request->has('password')) {
-            $password = Hash::make($request->password);
-        } else {
-             $password = $officer->password;
-        }   
-
-        $updated = $officer->update([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'password'=>$password,
-            'role'=>'officer'
-        ]);
-
-        if($updated){
-            return redirect('/petugas')->with('message','data berhasil diubah');
-        }
-    }
-
-    public function createAdmin () {
-       return view('dashboard.admin.input');
-    }
-
-
     public function storeAdmin (Request $request) {
         $this->validate($request, [
                 'name'=>['required'],
                 'email'=>['required'],
-                'password'=>['required']
+                'password'=>['required'],
+                'role'=>['required']
         ]);
 
         $userCreated = User::create([
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
-            'role'=>'admin'
+            'role'=>$request->role
         ]);
 
         if($userCreated){
-            return redirect('/admin')->with('message','data berhasil ditambahkan');
+            return redirect('/role')->with('message','data berhasil ditambahkan');
         }
     }
 
@@ -121,6 +62,7 @@ class UserController extends Controller
     $this->validate($request, [
             'name'=>['required'],
             'email'=>['required'],
+            'role'=>['required']
     ]);
 
     $admin = User::findOrFail($id);
@@ -135,12 +77,11 @@ class UserController extends Controller
         'name'=>$request->name,
         'email'=>$request->email,
         'password'=>$password,
-        'role'=>'admin'
+        'role'=>$request->role
     ]);
 
     if($updated){
-        return redirect('/admin')->with('message','data berhasil diubah');
+        return redirect('/role')->with('message','data berhasil diubah');
     }
     }
-
 }
