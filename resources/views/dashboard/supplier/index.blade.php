@@ -25,11 +25,23 @@
     <section class="section">
         <div class="card">
             <div class="card-header">
-                <div class="buttons">
-                    <a href="{{ '/input-supplier' }}" class="btn btn-dark">Tambah Data</a>
-                    @if(Auth::user()->role === 'kepalagudang')
-                        <a href="{{ '/excel/suppliers' }}" class="btn btn-dark">Ekspor Excel</a>
-                    @endif
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-auto">
+                        <div class="buttons">
+                            <a href="{{ '/input-supplier' }}" class="btn btn-dark">Tambah Data</a>
+                            @if(Auth::user()->role === 'kepalagudang')
+                                <a href="{{ '/excel/suppliers' }}" class="btn btn-dark">Ekspor Excel</a>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <form action="{{ url()->current() }}" method="GET">
+                            @csrf
+                            <div class="form-group mb-0">
+                                <input type="text" name="search" class="form-control" placeholder="Cari..." value="{{ request('search') }}">
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="card-body">

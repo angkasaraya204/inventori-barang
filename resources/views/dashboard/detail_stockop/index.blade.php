@@ -25,11 +25,27 @@
     <section class="section">
         <div class="card">
             <div class="card-header">
-                <div class="buttons">
-                    <a href="{{ '/input-stockop' }}" class="btn btn-dark">Tambah Data</a>
-                    @if(Auth::user()->role === 'kepalagudang' || Auth::user()->role === 'admin')
-                        <a href="{{ '/excel/stockop' }}" class="btn btn-dark">Ekspor Excel</a>
-                    @endif
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-auto">
+                        <div class="buttons">
+                            <a href="{{ '/input-stockop' }}" class="btn btn-dark">Tambah Data</a>
+                            @if(Auth::user()->role === 'kepalagudang' || Auth::user()->role === 'admin')
+                                <a href="{{ '/excel/stockop' }}" class="btn btn-dark">Ekspor Excel</a>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <form action="{{ url()->current() }}" method="GET" class="d-flex align-items-center">
+                            <div class="form-group mb-0">
+                                <input 
+                                    type="date" 
+                                    name="bydate" 
+                                    class="form-control" 
+                                    value="{{ request('bydate') }}">
+                            </div>
+                            <button type="submit" class="btn btn-primary text-secondary">Filter</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="card-body">
