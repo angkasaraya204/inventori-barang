@@ -10,7 +10,7 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="">Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Data Stok Barang</li>
                         <li class="breadcrumb-item active" aria-current="page">Tambah Data</li>
                     </ol>
@@ -23,7 +23,7 @@
             <div class="card-header">
             </div>
             <div class="card-body">
-                <form action="{{ '/input-stockop' }}" method="POST" enctype="multipart/form-data" class="form form-vertical">
+                <form action="{{ '/stockop/input' }}" method="POST" enctype="multipart/form-data" class="form form-vertical">
                     @csrf
                     <div class="form-body">
                         <div class="row">

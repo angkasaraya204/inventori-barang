@@ -16,11 +16,10 @@ class Role
      */
     public function handle(Request $request, Closure $next, $role): Response
     {
-        $user = Auth::user();
-        if($user->role === $role){
+        if (Auth::check() && Auth::user()->role === $role) {
             return $next($request);
-        } else {
-            return redirect('/');
         }
+        // Redirect jika tidak memiliki role yang sesuai
+        return redirect()->guest(route('login'))->with('error', 'You do not have access to this page.');
     }
 }

@@ -21,13 +21,16 @@ class AuthController extends Controller
             'password'=>['required']
         ]);
 
-        $user = User::where('email', $request->email)->first();
-        if(!$user || !Hash::check($request->password, $user->password)){
-            return redirect('/login')->with('error', 'Email or Password is not valid !!');
-        } else {
-            Auth::login($user, false);
-            return redirect('/');
+        if (Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
+            $request->session()->regenerate();
+    
+            // Redirect ke URL yang diminta sebelumnya, atau ke default
+            return redirect()->intended(route('dashboard'));
         }
+    
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
     }
 
     public function logout (Request $request) {

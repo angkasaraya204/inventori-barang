@@ -15,7 +15,7 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="">Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Stok Barang</li>
                     </ol>
                 </nav>
@@ -28,9 +28,9 @@
                 <div class="row align-items-center justify-content-between">
                     <div class="col-auto">
                         <div class="buttons">
-                            <a href="{{ '/input-stockop' }}" class="btn btn-dark">Tambah Data</a>
+                            <a href="{{ '/stockop/input/' }}" class="btn btn-dark">Tambah Data</a>
                             @if(Auth::user()->role === 'kepalagudang' || Auth::user()->role === 'admin')
-                                <a href="{{ '/excel/stockop' }}" class="btn btn-dark">Ekspor Excel</a>
+                                <a href="{{ '/stockop/excel/' }}" class="btn btn-dark">Ekspor Excel</a>
                             @endif
                         </div>
                     </div>
@@ -101,21 +101,21 @@
                                                 <!--    <span class="fa-fw select-all fas"></span> Detail-->
                                                 <!--</button>-->
                                                 <!-- Setujui -->
-                                                <form action="/stockop/approve/{{$detstocksOp->id}}" method="POST">
+                                                <form action="{{ '/stockop/approve/'.$detstocksOp->id }}" method="POST">
                                                     @csrf
                                                     <button type="submit" class="dropdown-item text-success">
                                                         <span class="fa-fw select-all fas"></span> Setujui
                                                     </button>
                                                 </form>
                                                 <!-- Tunda -->
-                                                <form action="/stockop/pending/{{$detstocksOp->id}}" method="POST">
+                                                <form action="{{ '/stockop/pending/'.$detstocksOp->id }}" method="POST">
                                                     @csrf
                                                     <button type="submit" class="dropdown-item text-secondary">
                                                         <span class="fa-fw select-all fas"></span> Tunda
                                                     </button>
                                                 </form>
                                                 <!-- Tolak -->
-                                                <form action="/stockop/reject/{{$detstocksOp->id}}" method="POST">
+                                                <form action="{{ '/stockop/reject/'.$detstocksOp->id }}" method="POST">
                                                     @csrf
                                                     <button type="submit" class="dropdown-item text-danger">
                                                         <span>✖</span> Tolak
@@ -135,7 +135,7 @@
                                             <a class="btn-delete-stockop dropdown-item" data-id="{{$detstocksOp->id}}">
                                                 <span class="fa-fw select-all fas"></span> Hapus
                                             </a>
-                                            <a class="dropdown-item" href="/ubah-stockop/{{$detstocksOp->id}}">
+                                            <a class="dropdown-item" href="{{ '/stockop/ubah/'.$detstocksOp->id }}">
                                                 <span class="fa-fw select-all fas"></span> Edit
                                             </a>
                                         </div>

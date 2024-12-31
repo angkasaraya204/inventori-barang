@@ -23,7 +23,7 @@
             <div class="card-header">
             </div>
             <div class="card-body">
-                <form action="/ubah-barang-Keluar/{{$productOutcome->id}}" method="POST" enctype="multipart/form-data" class="form form-vertical">
+                <form action="{{ '/barang/keluar/ubah'.$productOutcome->id }}" method="POST" enctype="multipart/form-data" class="form form-vertical">
                     @csrf
                     <div class="form-body">
                         <div class="row">

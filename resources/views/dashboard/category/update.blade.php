@@ -10,7 +10,7 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="">Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Data Kategori</li>
                         <li class="breadcrumb-item active" aria-current="page">Ubah Data</li>
                     </ol>
@@ -23,7 +23,7 @@
             <div class="card-header">
             </div>
             <div class="card-body">
-                <form action="/ubah-kategori/{{$category->id}}" method="POST" enctype="multipart/form-data" class="form form-vertical">
+                <form action="{{ '/kategori/ubah/'.$category->id }}" method="POST" enctype="multipart/form-data" class="form form-vertical">
                     @csrf
                     <div class="form-body">
                         <div class="row">

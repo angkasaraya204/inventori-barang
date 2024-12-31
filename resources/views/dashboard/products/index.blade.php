@@ -15,7 +15,7 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="">Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Data Barang</li>
                     </ol>
                 </nav>
@@ -28,9 +28,9 @@
                 <div class="row align-items-center justify-content-between">
                     <div class="col-auto">
                         <div class="buttons">
-                            <a href="{{ '/input-barang' }}" class="btn btn-dark">Tambah Data</a>
+                            <a href="{{ '/barang/input' }}" class="btn btn-dark">Tambah Data</a>
                             @if(Auth::user()->role === 'kepalagudang')
-                                <a href="{{ '/excel/products' }}" class="btn btn-dark">Ekspor Excel</a>
+                                <a href="{{ '/barang/excel' }}" class="btn btn-dark">Ekspor Excel</a>
                             @endif
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                                             <a class="btn-delete-product dropdown-item" data-id="{{$product->id}}">
                                                 <span class="fa-fw select-all fas"></span> Hapus
                                             </a>
-                                            <a class="dropdown-item" href="/ubah-barang/{{$product->id}}">
+                                            <a class="dropdown-item" href="{{ '/barang/ubah/'.$product->id }}">
                                                 <span class="fa-fw select-all fas"></span> Edit
                                             </a>
                                         </div>

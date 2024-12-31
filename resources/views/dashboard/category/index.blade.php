@@ -28,7 +28,7 @@
                 <div class="row align-items-center justify-content-between">
                     <div class="col-auto">
                         <div class="buttons">
-                            <a href="{{ '/input-kategori' }}" class="btn btn-dark">Tambah Data</a>
+                            <a href="{{ '/kategori/input/' }}" class="btn btn-dark">Tambah Data</a>
                         </div>
                     </div>
                     <div class="col-auto">
@@ -70,7 +70,7 @@
                                             <a class="btn-delete-category dropdown-item" data-id="{{$category->id}}">
                                                 <span class="fa-fw select-all fas"></span> Hapus
                                             </a>
-                                            <a class="dropdown-item" href="/ubah-kategori/{{$category->id}}">
+                                            <a class="dropdown-item" href="{{ '/kategori/ubah/'.$category->id }}">
                                                 <span class="fa-fw select-all fas"></span> Edit
                                             </a>
                                         </div>

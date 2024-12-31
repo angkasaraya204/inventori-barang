@@ -67,7 +67,7 @@ const choicesProduct = new Choices(selectProduct, {
 choicesProduct.setChoices(async () => {
     try {
         const productSelected = selectProduct.dataset.idProduct;
-        const items = await fetch("/all-products");
+        const items = await fetch("/barang/semua");
         const results = await items.json();
         let values = [];
         results.data.map((item) => {

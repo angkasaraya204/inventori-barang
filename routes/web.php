@@ -21,72 +21,101 @@ use App\Http\Controllers\Dashboard\DetStockOpController;
 |
 */
 
-
+// Rute untuk pengguna yang sudah login
 Route::middleware('auth')->group(function () {
-    Route::get('/', [OverviewController::class, 'index']);
-    Route::get('/barang', [ProductController::class, 'index']);
-    Route::get('/input-barang', [ProductController::class, 'create']);
-    Route::delete('/hapus-barang/{id}', [ProductController::class, 'delete']);
-    Route::post('/input-barang', [ProductController::class, 'store']);
-    Route::get('/ubah-barang/{id}', [ProductController::class, 'edit']);
-    Route::post('/ubah-barang/{id}', [ProductController::class, 'update']);
-    Route::get('/all-products',[ProductController::class,'getAllProducts']);
-    Route::get('/excel/products',[ProductController::class,'exportExcel']);
 
-    Route::get('/supplier', [SupplierController::class,'index']);
-    Route::delete('/hapus-supplier/{id}', [SupplierController::class, 'delete']);
-    Route::get('/input-supplier', [SupplierController::class, 'create']);
-    Route::post('/input-supplier', [SupplierController::class, 'store']);
-    Route::get('/ubah-supplier/{id}', [SupplierController::class, 'edit']);
-    Route::post('/ubah-supplier/{id}', [SupplierController::class, 'update']);
-    Route::get('/all-suppliers',[SupplierController::class,'getAllSuppliers']);
-    Route::get('/excel/suppliers',[SupplierController::class,'exportExcel']);
+    // Halaman utama
+    Route::get('/', [OverviewController::class, 'index'])->name('dashboard');
 
-    Route::get('/kategori', [CategoryController::class, 'index']);
-    Route::get('/input-kategori', [CategoryController::class, 'create']);
-    Route::post('/input-kategori', [CategoryController::class, 'store']);
-    Route::delete('/hapus-kategori/{id}', [CategoryController::class, 'delete']);
-    Route::get('/ubah-kategori/{id}', [CategoryController::class, 'edit']);
-    Route::post('/ubah-kategori/{id}', [CategoryController::class, 'update']);
-    // Route::get('/excel/kategori',[CategoryController::class,'exportExcel']);
+    // Barang
+    Route::prefix('barang')->group(function () {
+        Route::get('/', [ProductController::class, 'index']);
+        Route::get('/input', [ProductController::class, 'create']);
+        Route::post('/input', [ProductController::class, 'store']);
+        Route::get('/ubah/{id}', [ProductController::class, 'edit']);
+        Route::post('/ubah/{id}', [ProductController::class, 'update']);
+        Route::delete('/hapus/{id}', [ProductController::class, 'delete']);
+        Route::get('/semua', [ProductController::class, 'getAllProducts']);
+        Route::get('/excel', [ProductController::class, 'exportExcel']);
+    });
 
+    // Supplier
+    Route::prefix('supplier')->group(function () {
+        Route::get('/', [SupplierController::class, 'index']);
+        Route::get('/input', [SupplierController::class, 'create']);
+        Route::post('/input', [SupplierController::class, 'store']);
+        Route::get('/ubah/{id}', [SupplierController::class, 'edit']);
+        Route::post('/ubah/{id}', [SupplierController::class, 'update']);
+        Route::delete('/hapus/{id}', [SupplierController::class, 'delete']);
+        Route::get('/semua', [SupplierController::class, 'getAllSuppliers']);
+        Route::get('/excel', [SupplierController::class, 'exportExcel']);
+    });
 
-    Route::get('/role', [UserController::class, 'admin'])->middleware('role:admin');
-    Route::get('/input-role', [UserController::class, 'createAdmin'])->middleware('role:admin');
-    Route::post('/input-role', [UserController::class, 'storeAdmin'])->middleware('role:admin');
-    Route::delete('/hapus-role/{id}', [UserController::class, 'deleteAdmin'])->middleware('role:admin');
-    Route::get('/ubah-role/{id}', [UserController::class, 'editAdmin'])->middleware('role:admin');
-    Route::post('/ubah-role/{id}', [UserController::class, 'updateAdmin'])->middleware('role:admin');
+    // Kategori
+    Route::prefix('kategori')->group(function () {
+        Route::get('/', [CategoryController::class, 'index']);
+        Route::get('/input', [CategoryController::class, 'create']);
+        Route::post('/input', [CategoryController::class, 'store']);
+        Route::get('/ubah/{id}', [CategoryController::class, 'edit']);
+        Route::post('/ubah/{id}', [CategoryController::class, 'update']);
+        Route::delete('/hapus/{id}', [CategoryController::class, 'delete']);
+    });
 
-    Route::get('/barang-masuk', [ProductSuppliesController::class, 'indexIncome']);
-    Route::get('/input-barang-masuk', [ProductSuppliesController::class, 'createIncome']);
-    Route::get('/ubah-barang-masuk/{id}', [ProductSuppliesController::class, 'editIncome']);
-    Route::post('/ubah-barang-masuk/{id}', [ProductSuppliesController::class, 'updateIncome']);
-    Route::post('/input-barang-masuk', [ProductSuppliesController::class, 'storeIncome']);
-    Route::delete('/hapus-barang-masuk/{id}', [ProductSuppliesController::class,'deleteProductSupply']);
+    // Admin
+    Route::middleware('role:admin')->prefix('role')->group(function () {
+        Route::get('/', [UserController::class, 'admin']);
+        Route::get('/input', [UserController::class, 'createAdmin']);
+        Route::post('/input', [UserController::class, 'storeAdmin']);
+        Route::get('/ubah/{id}', [UserController::class, 'editAdmin']);
+        Route::post('/ubah/{id}', [UserController::class, 'updateAdmin']);
+        Route::delete('/hapus/{id}', [UserController::class, 'deleteAdmin']);
+    });
 
-    Route::get('/barang-keluar', [ProductSuppliesController::class, 'indexOutcome']);
-    Route::get('/input-barang-keluar', [ProductSuppliesController::class, 'createOutcome']);
-    Route::post('/input-barang-keluar', [ProductSuppliesController::class, 'storeOutcome']);
-    Route::delete('/hapus-barang-keluar/{id}', [ProductSuppliesController::class,'deleteProductSupply']);
-    Route::get('/ubah-barang-keluar/{id}', [ProductSuppliesController::class, 'editOutcome']);
-    Route::post('/ubah-barang-keluar/{id}', [ProductSuppliesController::class, 'updateOutcome']);
+    // Barang Masuk & Keluar
+    Route::prefix('barang')->group(function () {
+        Route::prefix('masuk')->group(function () {
+            Route::get('/', [ProductSuppliesController::class, 'indexIncome']);
+            Route::get('/input', [ProductSuppliesController::class, 'createIncome']);
+            Route::post('/input', [ProductSuppliesController::class, 'storeIncome']);
+            Route::get('/ubah/{id}', [ProductSuppliesController::class, 'editIncome']);
+            Route::post('/ubah/{id}', [ProductSuppliesController::class, 'updateIncome']);
+            Route::delete('/hapus/{id}', [ProductSuppliesController::class, 'deleteProductSupply']);
+        });
 
-    Route::get('/stockop', [DetStockOpController::class, 'indexDetStockop']);
-    Route::get('/input-stockop', [DetStockOpController::class, 'createDetStockop']);
-    Route::post('/input-stockop', [DetStockOpController::class, 'storeDetStockop']);
-    Route::get('/ubah-stockop/{id}', [DetStockOpController::class, 'editDetStockop']);
-    Route::post('/ubah-stockop/{id}', [DetStockOpController::class, 'updateDetStockop']);
-    Route::delete('/hapus-stockop/{id}', [DetStockOpController::class, 'destroyDetStockop']);
-    Route::get('/excel/stockop',[DetStockOpController::class,'exportExcel']);
-    Route::post('/stockop/approve/{id}', [DetStockOpController::class, 'approve'])->middleware('role:kepalagudang');
-    Route::post('/stockop/pending/{id}', [DetStockOpController::class, 'setPending'])->middleware('role:kepalagudang');
-    Route::post('/stockop/reject/{id}', [DetStockOpController::class, 'reject'])->middleware('role:kepalagudang');
+        Route::prefix('keluar')->group(function () {
+            Route::get('/', [ProductSuppliesController::class, 'indexOutcome']);
+            Route::get('/input', [ProductSuppliesController::class, 'createOutcome']);
+            Route::post('/input', [ProductSuppliesController::class, 'storeOutcome']);
+            Route::get('/ubah/{id}', [ProductSuppliesController::class, 'editOutcome']);
+            Route::post('/ubah/{id}', [ProductSuppliesController::class, 'updateOutcome']);
+            Route::delete('/hapus/{id}', [ProductSuppliesController::class, 'deleteProductSupply']);
+        });
+    });
 
-    Route::get('/logout',[AuthController::class, 'logout']);
+    // Stok
+    Route::prefix('stockop')->group(function () {
+        Route::get('/', [DetStockOpController::class, 'indexDetStockop']);
+        Route::get('/input', [DetStockOpController::class, 'createDetStockop']);
+        Route::post('/input', [DetStockOpController::class, 'storeDetStockop']);
+        Route::get('/ubah/{id}', [DetStockOpController::class, 'editDetStockop']);
+        Route::post('/ubah/{id}', [DetStockOpController::class, 'updateDetStockop']);
+        Route::delete('/hapus/{id}', [DetStockOpController::class, 'destroyDetStockop']);
+        Route::get('/excel', [DetStockOpController::class, 'exportExcel']);
+    });
+
+    // Kepala Gudang
+    Route::middleware('role:kepalagudang')->prefix('stockop')->group(function () {
+        Route::post('/approve/{id}', [DetStockOpController::class, 'approve']);
+        Route::post('/pending/{id}', [DetStockOpController::class, 'setPending']);
+        Route::post('/reject/{id}', [DetStockOpController::class, 'reject']);
+    });
+
+    // Logout
+    Route::get('/logout', [AuthController::class, 'logout']);
 });
 
-Route::middleware('guest')->group(function() {
+// Rute untuk tamu
+Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'index']);
     Route::post('/login', [AuthController::class, 'login'])->name('login');
 });

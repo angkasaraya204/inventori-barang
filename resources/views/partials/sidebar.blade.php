@@ -45,15 +45,15 @@
             <li class="sidebar-title"></li>
 
             @if(Auth::user()->role === 'kepalagudang')
-                <li class="sidebar-item {{ url()->current() == url('/barang-masuk') ? 'active' : '' }}">
-                    <a href="{{ '/barang-masuk' }}" class='sidebar-link'>
+                <li class="sidebar-item {{ url()->current() == url('/barang/masuk') ? 'active' : '' }}">
+                    <a href="{{ '/barang/masuk' }}" class='sidebar-link'>
                         <i class="bi bi-life-preserver"></i>
                         <span>Barang Masuk</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item {{ url()->current() == url('/barang-keluar') ? 'active' : '' }}">
-                    <a href="{{ '/barang-keluar' }}" class='sidebar-link'>
+                <li class="sidebar-item {{ url()->current() == url('/barang/keluar') ? 'active' : '' }}">
+                    <a href="{{ '/barang/keluar' }}" class='sidebar-link'>
                         <i class="bi bi-puzzle"></i>
                         <span>Barang Keluar</span>
                     </a>

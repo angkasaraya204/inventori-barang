@@ -28,7 +28,7 @@
                 <div class="row align-items-center justify-content-between">
                     <div class="col-auto">
                         <div class="buttons">
-                            <a href="{{ '/input-role' }}" class="btn btn-dark">Tambah Data</a>
+                            <a href="{{ '/role/input/' }}" class="btn btn-dark">Tambah Data</a>
                         </div>
                     </div>
                     <div class="col-auto">
@@ -74,7 +74,7 @@
                                             <a class="btn-delete-role dropdown-item" data-id="{{$admin->id}}">
                                                 <span class="fa-fw select-all fas"></span> Hapus
                                             </a>
-                                            <a class="dropdown-item" href="/ubah-role/{{$admin->id}}">
+                                            <a class="dropdown-item" href="{{ '/role/ubah/'.$admin->id }}">
                                                 <span class="fa-fw select-all fas"></span> Edit
                                             </a>
                                         </div>

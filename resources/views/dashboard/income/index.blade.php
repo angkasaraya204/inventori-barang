@@ -15,7 +15,7 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="">Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Data Barang Masuk</li>
                     </ol>
                 </nav>
@@ -26,7 +26,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="buttons">
-                    <a href="{{ '/input-barang-masuk' }}" class="btn btn-dark">Tambah Data</a>
+                    <a href="{{ '/barang/masuk/input/' }}" class="btn btn-dark">Tambah Data</a>
                 </div>
             </div>
             <div class="card-body">
@@ -64,7 +64,7 @@
                                             <a class="btn-delete-product-income dropdown-item" data-id="{{$productIncome->id}}">
                                                 <span class="fa-fw select-all fas"></span> Hapus
                                             </a>
-                                            <a class="dropdown-item" href="/ubah-barang-masuk/{{$productIncome->id}}">
+                                            <a class="dropdown-item" href="{{ '/barang/masuk/ubah/'.$productIncome->id }}">
                                                 <span class="fa-fw select-all fas"></span> Edit
                                             </a>
                                         </div>

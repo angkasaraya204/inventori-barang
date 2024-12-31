@@ -53,7 +53,7 @@ window.onload = toast();
 document.querySelectorAll(".btn-delete-category").forEach((btnDelete) => {
     deleteModal(
         btnDelete,
-        "/hapus-kategori",
+        "/kategori/hapus",
         "data yang telah dihapus tidak bisa dikembalikan"
     );
 });
@@ -61,7 +61,7 @@ document.querySelectorAll(".btn-delete-category").forEach((btnDelete) => {
 document.querySelectorAll(".btn-delete-product").forEach((btnDelete) => {
     deleteModal(
         btnDelete,
-        "/hapus-barang",
+        "/barang/hapus",
         "data yang telah dihapus tidak bisa dikembalikan"
     );
 });
@@ -69,7 +69,7 @@ document.querySelectorAll(".btn-delete-product").forEach((btnDelete) => {
 document.querySelectorAll(".btn-delete-supplier").forEach((btnDelete) => {
     deleteModal(
         btnDelete,
-        "/hapus-supplier",
+        "/supplier/hapus",
         "data yang telah dihapus tidak bisa dikembalikan"
     );
 });
@@ -77,7 +77,7 @@ document.querySelectorAll(".btn-delete-supplier").forEach((btnDelete) => {
 document.querySelectorAll(".btn-delete-officer").forEach((btnDelete) => {
     deleteModal(
         btnDelete,
-        "/hapus-petugas",
+        "/petugas/hapus",
         "data yang telah dihapus tidak bisa dikembalikan"
     );
 });
@@ -85,7 +85,7 @@ document.querySelectorAll(".btn-delete-officer").forEach((btnDelete) => {
 document.querySelectorAll(".btn-delete-role").forEach((btnDelete) => {
     deleteModal(
         btnDelete,
-        "/hapus-role",
+        "/role/hapus",
         "data yang telah dihapus tidak bisa dikembalikan"
     );
 });
@@ -93,7 +93,7 @@ document.querySelectorAll(".btn-delete-role").forEach((btnDelete) => {
 document.querySelectorAll(".btn-delete-product-income").forEach((btnDelete) => {
     deleteModal(
         btnDelete,
-        "/hapus-barang-masuk",
+        "/barang/masuk/hapus",
         "Menghapus data barang masuk juga akan mempengaruhi harga data barang terkait"
     );
 });
@@ -101,7 +101,7 @@ document.querySelectorAll(".btn-delete-product-income").forEach((btnDelete) => {
 document.querySelectorAll(".btn-delete-product-outcome").forEach((btnDelete) => {
     deleteModal(
         btnDelete,
-        "/hapus-barang-keluar",
+        "/barang/keluar/hapus",
         "Menghapus data barang keluar juga akan mempengaruhi harga data barang terkait"
     );
 });
@@ -109,7 +109,7 @@ document.querySelectorAll(".btn-delete-product-outcome").forEach((btnDelete) => 
 document.querySelectorAll(".btn-delete-stockop").forEach((btnDelete) => {
     deleteModal(
         btnDelete,
-        "/hapus-stockop",
+        "/stockop/hapus",
         "data yang telah dihapus tidak bisa dikembalikan"
     );
 });

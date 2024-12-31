@@ -66,7 +66,7 @@ const choicesProduct = new Choices(selectProduct, {
 
 choicesProduct.setChoices(async () => {
     try {
-        const items = await fetch("/all-products");
+        const items = await fetch("/barang/semua/");
         const results = await items.json();
         let values = [];
         results.data.map((item) => {
@@ -147,7 +147,7 @@ const choicesSupplier = new Choices(selectSupplier, {
 
 choicesSupplier.setChoices(async () => {
     try {
-        const items = await fetch("/all-suppliers");
+        const items = await fetch("/supplier/semua");
         const results = await items.json();
         let values = [];
         results.data.map((item) => {
